@@ -8,14 +8,13 @@ jobs:
           password: $DOCKERHUB_PASSWORD
 
     environment:
-      CLOUDNAME: fullmarketstorage
-      DBURL: https://fullmarket-e6156-default-rtdb.firebaseio.com/
-      ENCODE: fullmarket
-      KeyCredentialJSON: $2b$10$LXm3XFxHTE2rso2bpHTANuXLZZWoXssChhzfFs0LpW2ZK/Wj4ifmq
-      KEYVALUECLOUD: 798549958657717
-      SECRETKEYCLOUD: p_BFaQ2XC2C1srYPQ0BkZe5OwKs
-      URLCredentialKey: https://api.jsonbin.io/v3/b/624692ab1a1b610f08496185
-
+      CLOUDNAME: $CLOUDNAME
+      DBURL: $DBURL 
+      ENCODE: $ENCODE
+      KeyCredentialJSON: $KeyCredentialJSON
+      KEYVALUECLOUD: $KEYVALUECLOUD
+      SECRETKEYCLOUD: $SECRETKEYCLOUD
+      URLCredentialKey: $URLCredentialKey
     steps:
       - checkout
       - run:
