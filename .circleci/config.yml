@@ -1,31 +1,25 @@
 version: 2.1
-jobs:
-  deployed:
-    docker:
-      - image: circleci/python:3.7.4
-        auth: 
-          username: sebasdev321
-          password: $DOCKERHUB_PASSWORD
 
-    environment:
-      CLOUDNAME: $CLOUDNAME
-      DBURL: $DBURL 
-      ENCODE: $ENCODE
-      KeyCredentialJSON: $KeyCredentialJSON
-      KEYVALUECLOUD: $KEYVALUECLOUD
-      SECRETKEYCLOUD: $SECRETKEYCLOUD
-      URLCredentialKey: $URLCredentialKey
+jobs:
+  build: 
+    working_directory: ~/circleci-python
+    docker:
+      - image: "circleci/python:3.6.4"
     steps:
       - checkout
-      - run:
-          name: Install Python Dependencies
-          command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip install firebase_admin
-            pip install -r requirements.txt
-            
+      - run: python3 main.py
+  test: 
+    working_directory: ~/circleci-python
+    docker: 
+      - image: "circleci/python:3.6.4"
+    steps:
+      - checkout
+      - run: python3 main-test-py
+
 workflows:
-  deployed-workflow:
-    jobs:
-      - deployed
+  build_and_test:
+    jobs: 
+      - build
+      - test:
+          requires:
+          - build
